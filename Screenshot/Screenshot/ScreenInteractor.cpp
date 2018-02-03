@@ -1,13 +1,12 @@
 ﻿#include "ScreenInteractor.h"
 
-ScreenInteractor::ScreenInteractor(char * name)
-{
+ScreenInteractor::ScreenInteractor(char * name){
 	fileName = name;
 	screenData = NULL;
 	imgqual = Good;
 }
-bool ScreenInteractor::TakeScreenshot()
-{
+
+bool ScreenInteractor::TakeScreenshot(){
 	//setup
 	GdiplusStartupInput gdiplusStartupInput;
 	ULONG_PTR gdiplusToken;
@@ -102,8 +101,7 @@ bool ScreenInteractor::TakeScreenshot()
 	return true;
 
 }
-void ScreenInteractor::LeftClick(int x, int y)
-{
+void ScreenInteractor::LeftClick(int x, int y){
 
 	MouseMove(x, y);
 	INPUT    Input = { 0 };
@@ -122,8 +120,7 @@ void ScreenInteractor::LeftClick(int x, int y)
 	SendInput(1, &Input, sizeof(INPUT));
 
 }
-void ScreenInteractor::RightClick(int x,int y)
-{
+void ScreenInteractor::RightClick(int x,int y){
 	MouseMove(x, y);
 	INPUT    Input = { 0 };
 
@@ -140,8 +137,7 @@ void ScreenInteractor::RightClick(int x,int y)
 	SendInput(1, &Input, sizeof(INPUT));
 }
 
-void ScreenInteractor::KeyPress(char * text, int size)
-{
+void ScreenInteractor::KeyPress(char * text, int size){
 	INPUT ip;
 	INPUT shift; //handle cases where shift is held down
 
@@ -285,8 +281,8 @@ int ScreenInteractor::GetEncoderClsid(const WCHAR* format, CLSID* pClsid){
 	return -1;  // Failure
 }
 
-void ScreenInteractor::MouseMove(int x, int y)
-{
+void ScreenInteractor::MouseMove(int x, int y){
+
 	double fScreenWidth = GetSystemMetrics(SM_CXSCREEN) - 1;
 	double fScreenHeight = GetSystemMetrics(SM_CYSCREEN) - 1;
 	double fx = x*(65535.0f / fScreenWidth);
